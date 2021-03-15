@@ -10,10 +10,22 @@
     <modelVersion>4.0.0</modelVersion>
 
     <artifactId>service_hosp</artifactId>
+    <version>1.0</version>
+    <packaging>jar</packaging>
+    <name>service_hosp</name>
+    <description>service_hosp医院信息管理</description>
 
-    <properties>
-        <maven.compiler.source>8</maven.compiler.source>
-        <maven.compiler.target>8</maven.compiler.target>
-    </properties>
+    <dependencies>
+    </dependencies>
+
+    <build>
+        <finalName>service-hosp</finalName>
+        <plugins>
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+            </plugin>
+        </plugins>
+    </build>
 
 </project>
