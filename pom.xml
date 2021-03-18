@@ -34,6 +34,7 @@
         <aliyun.version>4.5.18</aliyun.version>
         <oss.version>3.11.3</oss.version>
         <jodatime.version>2.10.10</jodatime.version>
+        <knife4j.version>3.0.2</knife4j.version>
     </properties>
 
     <!--配置dependencyManagement锁定依赖的版本-->
@@ -65,19 +66,20 @@
             <dependency>
                 <groupId>mysql</groupId>
                 <artifactId>mysql-connector-java</artifactId>
+                <version>${mysql.version}</version>
             </dependency>
 
             <!--swagger2 && swagger ui && swagger-->
             <!-- https://mvnrepository.com/artifact/io.springfox/springfox-swagger-ui -->
-            <dependency>
-                <groupId>io.springfox</groupId>
-                <artifactId>springfox-boot-starter</artifactId>
-                <version>${swagger.version}</version>
-            </dependency>
+<!--            <dependency>-->
+<!--                <groupId>io.springfox</groupId>-->
+<!--                <artifactId>springfox-boot-starter</artifactId>-->
+<!--                <version>${swagger.version}</version>-->
+<!--            </dependency>-->
             <dependency>
                 <groupId>com.github.xiaoymin</groupId>
                 <artifactId>knife4j-spring-boot-starter</artifactId>
-                <version>3.0.2</version>
+                <version>${knife4j.version}</version>
             </dependency>
 
             <dependency>

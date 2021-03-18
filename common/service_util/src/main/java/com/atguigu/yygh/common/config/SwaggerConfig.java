@@ -25,6 +25,8 @@ public class SwaggerConfig {
                 .enable(true)
                 .apiInfo(apiInfo())
                 .select()
+                //这里指定Controller扫描包路径
+                // RequestHandlerSelectors.basePackage("com.github.xiaoymin.knife4j.controller")是指扫描该包下的控制器，改成扫描所有使用Api注解的控制器
                 .apis(RequestHandlerSelectors.withClassAnnotation(Api.class))
                 .paths(PathSelectors.any())
                 .build();
