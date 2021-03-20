@@ -52,7 +52,6 @@ public class HospitalSetController {
     public Result selectPageHospitalSet(Integer currentPage,
                                         Integer pageSize,
                                         @RequestBody HospitalSetQueryVo hospitalSetQueryVo) {
-        Page<HospitalSet> page = new Page<>(currentPage, pageSize);
         QueryWrapper<HospitalSet> wrapper = new QueryWrapper<>();
         if(!StringUtils.isEmpty(hospitalSetQueryVo.getHosname())) {
             wrapper.like("hosname", hospitalSetQueryVo.getHosname());
@@ -60,6 +59,8 @@ public class HospitalSetController {
         if(!StringUtils.isEmpty(hospitalSetQueryVo.getHoscode())) {
             wrapper.eq("hoscode", hospitalSetQueryVo.getHoscode());
         }
+        int count = hospitalSetService.count(wrapper);
+        Page<HospitalSet> page = new Page<>(currentPage, pageSize, count);
         Page<HospitalSet> pageHospitalSet = hospitalSetService.page(page, wrapper);
         return Result.ok(pageHospitalSet);
     }
