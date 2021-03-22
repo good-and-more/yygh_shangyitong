@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="app">
+        <div v-for="(user,index) in userList"></div>
+            <div>{{index}}--姓名：{{user.username}}，年龄{{user.age}}</div>
+        </div>
+    </div>
+    <script src="vue.min.js"></script>
+    <script>
+        // 绑定事件
+        new Vue({
+            el: '#app',
+            data: {
+                userList:[
+                    {username:'helen',age:18},
+                    {username:'peter',age:28}
+                ]
+            }
+            
+        })
+    </script>
+</body>
+
+</html>
