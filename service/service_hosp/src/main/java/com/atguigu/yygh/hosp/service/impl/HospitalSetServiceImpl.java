@@ -9,5 +9,4 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class HospitalSetServiceImpl extends ServiceImpl<HospitalSetMapper, HospitalSet> implements HospitalSetService {
-
 }
