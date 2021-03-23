@@ -19,6 +19,7 @@ import java.lang.reflect.Array;
 import java.util.List;
 import java.util.Random;
 
+@CrossOrigin
 @RestController
 @RequestMapping("/admin/hosp/hospitalSet")
 @Api(tags = "医院信息管理 HospitalSetController")
@@ -81,10 +82,10 @@ public class HospitalSetController {
 
 //    根据条件分页查询
     @ApiOperation("根据条件分页查询医院")
-    @PostMapping("selectPage")
-    public Result selectPageHospitalSet(Integer currentPage,
-                                        Integer pageSize,
-                                        @RequestBody HospitalSetQueryVo hospitalSetQueryVo) {
+    @PostMapping("selectPage/{currentPage}/{pageSize}")
+    public Result selectPageHospitalSet(@PathVariable Integer currentPage,
+                                        @PathVariable Integer pageSize,
+                                        @RequestBody(required = false) HospitalSetQueryVo hospitalSetQueryVo) {
         QueryWrapper<HospitalSet> wrapper = new QueryWrapper<>();
         if(!StringUtils.isEmpty(hospitalSetQueryVo.getHosname())) {
             wrapper.like("hosname", hospitalSetQueryVo.getHosname());
