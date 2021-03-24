@@ -38,7 +38,6 @@ public class HospitalSetController {
     }
 
     //2.逻辑删除医院信息
-    @ApiIgnore
     @GetMapping("delete/{id}")
     public Result removeHospitalSetById(@PathVariable Long id) {
         boolean flag = hospitalSetService.removeById(id);
@@ -47,12 +46,6 @@ public class HospitalSetController {
 
     @GetMapping("getHospSet/{id}")
     public Result getHospitalSet(@PathVariable Long id) {
-        try {
-            int a = 1/0;
-        } catch (Exception e) {
-            throw new YyghException("失败", 201);
-        }
-
         HospitalSet hospitalSet = hospitalSetService.getById(id);
         return Result.ok(hospitalSet);
     }
@@ -75,7 +68,7 @@ public class HospitalSetController {
 //    批量删除
     @ApiOperation("批量删除医院信息")
     @PostMapping("batchDel")
-    public Result batchDelHospitalSet(@RequestParam List<Long> ids) {
+    public Result batchDelHospitalSet(@RequestBody List<Long> ids) {
         boolean result = hospitalSetService.removeByIds(ids);
         return result ? Result.ok(result) : Result.fail(result);
     }
@@ -108,8 +101,8 @@ public class HospitalSetController {
     }
 
     @ApiOperation("医院设置锁定和解锁接口")
-    @PostMapping("lock")
-    public Result lock(Long id,Integer status) {
+    @GetMapping("lock/{id}/{status}")
+    public Result lock(@PathVariable Long id,@PathVariable Integer status) {
         //根据id查询医院设置信息
         HospitalSet hospitalSet = hospitalSetService.getById(id);
         //设置状态

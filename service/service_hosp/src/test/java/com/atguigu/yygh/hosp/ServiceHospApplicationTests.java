@@ -24,4 +24,17 @@ public class ServiceHospApplicationTests {
         Page<HospitalSet> hospitalSetPage = hospitalSetService.page(page, queryWrapper);
         System.out.println(hospitalSetPage);
     }
+
+    //某小伙子不知道这个代码有什么问题
+    public void line(int i) {
+        if (i<10) {
+            line(i+1);
+            System.out.println(String.format("%3d",i));
+        }
+    }
+
+    @Test
+    public void testLine() {
+        line(8);
+    }
 }

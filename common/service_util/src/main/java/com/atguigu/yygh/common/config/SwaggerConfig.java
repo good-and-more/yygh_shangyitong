@@ -37,7 +37,7 @@ public class SwaggerConfig {
      */
     private ApiInfo apiInfo() {
         return new ApiInfoBuilder()
-                .title("service_hosp医院信息管理")
+                .title("后台管理系统-API文档")
                 .contact(new Contact("learn_and_think", "https://github.com/good-and-more/yygh_shangyitong", "yygh@atguigu.com"))
                 .description("尚医通-接口文档测试")
                 .version(VERSION)

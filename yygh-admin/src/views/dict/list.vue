@@ -1,6 +1,6 @@
 <template>
   <div class="app-container">
-  <div style="margin-bottom:20px">医院设置列表</div>
+  <div style="margin-bottom:20px">数据字典</div>
     <el-form :inline="true" class="demo-form-inline">
       <el-form-item>
         <el-input v-model="hospitalSetQueryVo.hosname" placeholder="医院名称"/>
