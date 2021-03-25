@@ -30,7 +30,7 @@
         <jwt.version>0.9.1</jwt.version>
         <fastjson.version>1.2.75</fastjson.version>
         <httpclient.version>4.5.13</httpclient.version>
-        <easyexcel.version>2.2.7</easyexcel.version>
+        <easyexcel.version>2.2.8</easyexcel.version>
         <aliyun.version>4.5.18</aliyun.version>
         <oss.version>3.11.3</oss.version>
         <jodatime.version>2.10.10</jodatime.version>

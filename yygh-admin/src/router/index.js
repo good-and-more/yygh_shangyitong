@@ -73,12 +73,13 @@ export const constantRouterMap = [
     redirect: '/cmn/list',
     name: '数据字典',
     meta: { title: '数据字典', icon: 'example' },
+    alwaysShow: true,
     children: [
       {
         path: 'list',
-        name: '数据字典',
+        name: '字典列表',
         component: () => import('@/views/dict/list'),
-        meta: { title: '数据字典', icon: 'table' }
+        meta: { title: '字典列表', icon: 'table' }
       }
     ]
   },

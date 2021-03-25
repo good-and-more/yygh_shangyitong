@@ -1,12 +1,10 @@
 import request from '@/utils/request'
 
 export default {
-    getHospSetList(currentPage,pageSize,hospitalSetQueryVo) {
+    dictList(id) {
         return request ({
-            url: `/admin/hosp/hospitalSet/selectPage/${currentPage}/${pageSize}`,
-            method: 'post',
-            data: hospitalSetQueryVo
+            url: `/admin/cmn/dict/findChildData/${id}`,
+            method: 'get',
         })
     },
-    
 }
