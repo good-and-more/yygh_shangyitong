@@ -59,7 +59,8 @@ public class DictServiceImpl extends ServiceImpl<DictMapper, Dict> implements Di
             response.setCharacterEncoding("utf-8");
             // 这里URLEncoder.encode可以防止中文乱码 当然和easyexcel没有关系
             String fileName = URLEncoder.encode("为什么我格式不对", "UTF-8");
-            response.setHeader("Content-disposition", "attachment;filename=" + fileName + ".xls");
+            response.setHeader("Content-disposition", "attachment;filename=" + fileName + ".xlsx");
+            //todo 这里如果用火狐浏览器，不会识别filename=多少，下载的全是xls，不知道为什么，换回谷歌浏览器即可正常下载xlsx
 
     //            查询数据
             List<Dict> dicts = baseMapper.selectList(null);

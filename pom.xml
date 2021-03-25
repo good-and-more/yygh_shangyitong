@@ -6,6 +6,7 @@
         <module>common</module>
         <module>model</module>
         <module>service</module>
+        <module>service</module>
     </modules>
     <parent>
         <groupId>org.springframework.boot</groupId>
@@ -68,6 +69,8 @@
                 <artifactId>mysql-connector-java</artifactId>
                 <version>${mysql.version}</version>
             </dependency>
+
+
 
             <!--swagger2 && swagger ui && swagger-->
             <!-- https://mvnrepository.com/artifact/io.springfox/springfox-swagger-ui -->
