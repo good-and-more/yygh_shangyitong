@@ -2,7 +2,7 @@
 # Date: 2020-07-31 14:28:31
 # Generator: MySQL-Front 6.1  (Build 1.26)
 
-CREATE DATABASE IF NOT EXISTS `yygh_manage` CHARACTER SET utf8mb4;
+CREATE DATABASE IF NOT EXISTS `yygh_manage` CHARACTER SET utf8;
 USE `yygh_manage`;
 
 #
