@@ -6,6 +6,7 @@ import org.springframework.context.annotation.Configuration;
 import springfox.documentation.builders.ApiInfoBuilder;
 import springfox.documentation.builders.PathSelectors;
 import springfox.documentation.builders.RequestHandlerSelectors;
+import springfox.documentation.oas.annotations.EnableOpenApi;
 import springfox.documentation.service.ApiInfo;
 import springfox.documentation.service.Contact;
 import springfox.documentation.spi.DocumentationType;
@@ -18,8 +19,8 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
  * @author qy
  */
 @Configuration
-@EnableSwagger2
-public class Swagger2Config {
+@EnableOpenApi
+public class SwaggerConfig {
 
 //    @Bean
 //    public Docket webApiConfig(){
@@ -50,7 +51,7 @@ public class Swagger2Config {
 
     private ApiInfo webApiInfo(){
         return new ApiInfoBuilder()
-                .title("网站-API文档")
+                .title("医院管理网站-API文档")
                 .description("本文档描述了网站微服务接口定义")
                 .version("1.0")
                 .contact(new Contact("qy", "http://atguigu.com", "55317332@qq.com"))

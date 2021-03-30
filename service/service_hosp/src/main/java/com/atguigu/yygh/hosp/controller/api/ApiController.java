@@ -8,7 +8,10 @@ import com.atguigu.yygh.hosp.service.DepartmentService;
 import com.atguigu.yygh.hosp.service.HospitalService;
 import com.atguigu.yygh.hosp.service.HospitalSetService;
 import com.atguigu.yygh.hosp.service.ScheduleService;
+import com.atguigu.yygh.model.hosp.Department;
 import com.atguigu.yygh.model.hosp.Hospital;
+import com.atguigu.yygh.vo.hosp.DepartmentQueryVo;
+import org.springframework.data.domain.Page;
 import io.swagger.annotations.Api;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.util.StringUtils;
@@ -103,6 +106,43 @@ public class ApiController {
         Map<String, Object> paramMap = HttpRequestHelper.switchMap(requestMap);
         this.validateSignKey((String) paramMap.get("sign"),(String) paramMap.get("hoscode"));
         departmentService.save(paramMap);
+        return Result.ok();
+    }
+
+    //分页查询科室
+    @PostMapping("department/list")
+    public Result findDepartment(HttpServletRequest request) {
+        Map<String, String[]> requestMap = request.getParameterMap();
+        Map<String, Object> paramMap = HttpRequestHelper.switchMap(requestMap);
+
+//        医院编号
+        String hoscode = (String) paramMap.get("hoscode");
+//        签名校验
+        this.validateSignKey((String) paramMap.get("sign"),hoscode);
+
+//        当前页和每页值
+        int page = StringUtils.isEmpty(paramMap.get("page")) ? 1 : Integer.parseInt((String)paramMap.get("page"));
+        int limit = StringUtils.isEmpty(paramMap.get("limit")) ? 10 : Integer.parseInt((String)paramMap.get("limit"));
+
+        DepartmentQueryVo departmentQueryVo = new DepartmentQueryVo();
+        departmentQueryVo.setHoscode(hoscode);
+
+        Page<Department> pageModel = departmentService.findPageDepartment(page, limit, departmentQueryVo);
+        return Result.ok(pageModel);
+    }
+
+    //删除科室
+    @PostMapping("department/remove")
+    public Result removeDepartment(HttpServletRequest request) {
+        Map<String, String[]> requestMap = request.getParameterMap();
+        Map<String, Object> paramMap = HttpRequestHelper.switchMap(requestMap);
+
+//        医院编号
+        String hoscode = (String) paramMap.get("hoscode");
+        String depcode = (String)paramMap.get("depcode");
+//        签名校验
+        this.validateSignKey((String) paramMap.get("sign"),hoscode);
+        departmentService.remove(hoscode,depcode);
         return Result.ok();
     }
 
