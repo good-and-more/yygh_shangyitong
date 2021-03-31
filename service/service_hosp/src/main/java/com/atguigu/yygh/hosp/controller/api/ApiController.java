@@ -10,7 +10,9 @@ import com.atguigu.yygh.hosp.service.HospitalSetService;
 import com.atguigu.yygh.hosp.service.ScheduleService;
 import com.atguigu.yygh.model.hosp.Department;
 import com.atguigu.yygh.model.hosp.Hospital;
+import com.atguigu.yygh.model.hosp.Schedule;
 import com.atguigu.yygh.vo.hosp.DepartmentQueryVo;
+import com.atguigu.yygh.vo.hosp.ScheduleQueryVo;
 import org.springframework.data.domain.Page;
 import io.swagger.annotations.Api;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -146,4 +148,51 @@ public class ApiController {
         return Result.ok();
     }
 
+//    上传排班接口
+    @PostMapping("saveSchedule")
+    public Result saveSchedule(HttpServletRequest request) {
+        Map<String, String[]> requestMap = request.getParameterMap();
+        Map<String, Object> paramMap = HttpRequestHelper.switchMap(requestMap);
+        String hoscode = (String) paramMap.get("hoscode");
+        //签名校验
+        this.validateSignKey((String) paramMap.get("sign"),hoscode);
+        scheduleService.save(paramMap);
+        return Result.ok();
+    }
+
+    //分页查询排班
+    @PostMapping("schedule/list")
+    public Result findSchedule(HttpServletRequest request) {
+        Map<String, String[]> requestMap = request.getParameterMap();
+        Map<String, Object> paramMap = HttpRequestHelper.switchMap(requestMap);
+//        医院编号
+        String hoscode = (String) paramMap.get("hoscode");
+//        签名校验
+        this.validateSignKey((String) paramMap.get("sign"),hoscode);
+
+//        当前页和每页值
+        int page = StringUtils.isEmpty(paramMap.get("page")) ? 1 : Integer.parseInt((String)paramMap.get("page"));
+        int limit = StringUtils.isEmpty(paramMap.get("limit")) ? 10 : Integer.parseInt((String)paramMap.get("limit"));
+
+        ScheduleQueryVo scheduleQueryVo = new ScheduleQueryVo();
+        scheduleQueryVo.setHoscode(hoscode);
+
+        Page<Schedule> pageModel = scheduleService.findPageSchedule(page, limit, scheduleQueryVo);
+        return Result.ok(pageModel);
+    }
+
+    //删除排班
+    @PostMapping("schedule/remove")
+    public Result removeSchedule(HttpServletRequest request) {
+        Map<String, String[]> requestMap = request.getParameterMap();
+        Map<String, Object> paramMap = HttpRequestHelper.switchMap(requestMap);
+
+//        医院编号
+        String hoscode = (String) paramMap.get("hoscode");
+        String hosScheduleId = (String)paramMap.get("hosScheduleId");
+//        签名校验
+        this.validateSignKey((String) paramMap.get("sign"),hoscode);
+        scheduleService.remove(hoscode,hosScheduleId);
+        return Result.ok();
+    }
 }
