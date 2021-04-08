@@ -7,6 +7,7 @@ import com.atguigu.yygh.model.cmn.Dict;
 import com.atguigu.yygh.vo.cmn.DictEeVo;
 import org.springframework.beans.BeanUtils;
 
+//配合easyexcel的导入功能需要写一个listener
 public class DictListener extends AnalysisEventListener<DictEeVo> {
 
     private DictMapper dictMapper;

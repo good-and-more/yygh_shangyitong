@@ -1,8 +1,6 @@
 package com.atguigu.yygh.cmn.service.impl;
 
 import com.alibaba.excel.EasyExcel;
-import com.alibaba.excel.ExcelWriter;
-import com.alibaba.excel.support.ExcelTypeEnum;
 import com.atguigu.yygh.cmn.listener.DictListener;
 import com.atguigu.yygh.cmn.mapper.DictMapper;
 import com.atguigu.yygh.cmn.service.DictService;
@@ -10,11 +8,11 @@ import com.atguigu.yygh.model.cmn.Dict;
 import com.atguigu.yygh.vo.cmn.DictEeVo;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import org.apache.poi.ss.usermodel.Sheet;
 import org.springframework.beans.BeanUtils;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
+import org.springframework.util.StringUtils;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletResponse;
@@ -90,4 +88,46 @@ public class DictServiceImpl extends ServiceImpl<DictMapper, Dict> implements Di
             e.printStackTrace();
         }
     }
+
+    /**
+     * 根据dictdoe和value查询字典名称
+     * @param dictCode
+     * @param value
+     * @return
+     */
+    @Override
+    public String getDictName(String dictCode, String value) {
+        if(StringUtils.isEmpty(dictCode)) {
+            QueryWrapper<Dict> wrapper = new QueryWrapper<>();
+            wrapper.eq("value", value);
+            Dict dict = baseMapper.selectOne(wrapper);
+            return dict.getName();
+        } else {
+            Dict codeDict = getDictByDictCode(dictCode);
+            Long parentId = codeDict.getId();
+            Dict finalDict = baseMapper.selectOne(new QueryWrapper<Dict>().eq("parent_id", parentId).eq("value", value));
+            return finalDict.getName();
+        }
+    }
+
+    private Dict getDictByDictCode(String dictCode) {
+        QueryWrapper<Dict> wrapper = new QueryWrapper<>();
+        wrapper.eq("dict_code", dictCode);
+        Dict codeDict = baseMapper.selectOne(wrapper);
+        return codeDict;
+    }
+
+    /**
+     * 根据dictCode获取下级节点
+     * @param dictCode
+     * @return
+     */
+    @Override
+    public List<Dict> findByDictCode(String dictCode) {
+        Dict dictByDictCode = this.getDictByDictCode(dictCode);
+        //根据id获取子节点，可以直接用前面写好的方法
+        List<Dict> childData = this.findChildData(dictByDictCode.getId());
+        return childData;
+    }
+
 }
