@@ -1,6 +1,5 @@
 package com.atguigu.yygh.hosp.controller;
 
-import com.atguigu.yygh.common.exception.YyghException;
 import com.atguigu.yygh.common.result.Result;
 import com.atguigu.yygh.common.utils.MD5;
 import com.atguigu.yygh.hosp.service.HospitalSetService;
@@ -15,7 +14,6 @@ import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
 import springfox.documentation.annotations.ApiIgnore;
 
-import java.lang.reflect.Array;
 import java.util.List;
 import java.util.Random;
 
