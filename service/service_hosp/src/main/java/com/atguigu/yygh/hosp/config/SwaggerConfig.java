@@ -1,4 +1,4 @@
-package com.atguigu.hospital.config;
+package com.atguigu.yygh.hosp.config;
 
 import io.swagger.annotations.Api;
 import org.springframework.context.annotation.Bean;
@@ -11,36 +11,19 @@ import springfox.documentation.service.ApiInfo;
 import springfox.documentation.service.Contact;
 import springfox.documentation.spi.DocumentationType;
 import springfox.documentation.spring.web.plugins.Docket;
-import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
-
-/**
- * Swagger2配置信息
- * @author qy
- */
 @Configuration
 @EnableOpenApi
 public class SwaggerConfig {
-
-//    @Bean
-//    public Docket webApiConfig(){
-//        return new Docket(DocumentationType.SWAGGER_2)
-//                .groupName("webApi")
-//                .apiInfo(webApiInfo())
-//                .select()
-//                //过滤掉admin路径下的所有页面
-//                .paths(Predicates.and(PathSelectors.regex("/P2P/.*")))
-//                //过滤掉所有error或error.*页面
-//                //.paths(Predicates.not(PathSelectors.regex("/error.*")))
-//                .build();
-//    }
-
+    private static final String VERSION = "1.0.0";
+    /**
+     * 创建API
+     */
     @Bean
     public Docket createRestApi(){
         return new Docket(DocumentationType.OAS_30)
-                .groupName("webApi")
                 .enable(true)
-                .apiInfo(webApiInfo())
+                .apiInfo(apiInfo())
                 .select()
                 //这里指定Controller扫描包路径
                 // RequestHandlerSelectors.basePackage("com.github.xiaoymin.knife4j.controller")是指扫描该包下的控制器，改成扫描所有使用Api注解的控制器
@@ -49,12 +32,15 @@ public class SwaggerConfig {
                 .build();
     }
 
-    private ApiInfo webApiInfo(){
+    /**
+     * 添加摘要信息
+     */
+    private ApiInfo apiInfo() {
         return new ApiInfoBuilder()
-                .title("hospital_manage-医院管理网站-API文档")
-                .description("本文档描述了网站微服务接口定义")
-                .version("1.0")
-                .contact(new Contact("qy", "http://atguigu.com", "55317332@qq.com"))
+                .title("service_hosp-API文档")
+                .contact(new Contact("learn_and_think", "https://github.com/good-and-more/yygh_shangyitong", "yygh@atguigu.com"))
+                .description("尚医通-接口文档测试")
+                .version(VERSION)
                 .build();
     }
 }

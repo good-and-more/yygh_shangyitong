@@ -20,7 +20,20 @@ export default {
         return request ({
             url: `/admin/cmn/dict/findByParentId/${parentId}`,
             method: 'get'
-
+        })
+    },
+    //更新医院上线状态
+    updateHospStatus(id,status) {
+        return request ({
+            url: `/admin/hosp/hospital/updateHospStatus/${id}/${status}`,
+            method: 'get'
+        })
+    },
+    //查看医院详情
+    getHospById(id) {
+        return request ({
+            url: `/admin/hosp/hospital/showHospDetail/${id}`,
+            method: 'get'
         })
     },
 }

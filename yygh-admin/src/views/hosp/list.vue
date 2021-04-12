@@ -67,6 +67,14 @@
         <el-table-column prop="createTime" label="创建时间"/>
 
         <el-table-column label="操作" width="230" align="center">
+            <template slot-scope="scope">
+                <router-link :to="'/hospSet/hospital/show/'+scope.row.id">
+                    <el-button type="primary" size="mini">查看</el-button>
+                </router-link>
+
+                <el-button v-if="scope.row.status == 1"  type="danger" size="mini" @click="updateHospStatus(scope.row.id, 0)">下线</el-button>
+                <el-button v-if="scope.row.status == 0"  type="primary" size="mini" @click="updateHospStatus(scope.row.id, 1)">上线</el-button>
+            </template>
         </el-table-column>
     </el-table>
 
@@ -116,7 +124,7 @@ export default {
             console.log('翻页。。。' + page)
             // 异步获取远程数据（ajax）
             this.page = page
-            hospitalApi.getPageList(this.page, this.limit, this.searchObj)
+            hospitalApi.getHospList(this.page, this.limit, this.searchObj)
             .then(
                 response => {
                 this.list = response.data.content //每页数据集合
@@ -133,14 +141,12 @@ export default {
                 this.provinceList = response.data
             })
         },
-
         // 当页码发生改变的时候
         changeSize(size) {
             console.log(size)
             this.limit = size
             this.fetchData(1)
         },
-
         // 重置查询表单
         resetData() {
             console.log('重置查询表单')
@@ -153,8 +159,23 @@ export default {
             this.districtList = []
             this.searchObj.districtCode = null
             hospitalApi.findByParentId(this.searchObj.provinceCode).then(response => {
-            this.cityList = response.data
-        })
+                this.cityList = response.data
+            })
+        },
+        cityChanged() {
+            this.districtList = []
+            this.searchObj.districtCode = null
+            hospitalApi.findByParentId(this.searchObj.cityCode)
+            .then(response => {
+                this.districtList = response.data
+            })
+        },
+        //更新医院的上线状态
+        updateHospStatus(id,status) {
+            hospitalApi.updateHospStatus(id,status)
+            .then(response => {
+                this.fetchData(this.page)
+            })
         }
     }
 }
