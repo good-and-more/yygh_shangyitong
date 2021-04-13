@@ -103,6 +103,16 @@ public class HospitalServiceImpl implements HospitalService {
         return result;
     }
 
+    //根据医院编号获取医院名称
+    @Override
+    public String getHospName(String hoscode) {
+        Hospital hospital = hospitalRepository.getHospitalByHoscode(hoscode);
+        if (null != hospital) {
+            return hospital.getHosname();
+        }
+        return null;
+    }
+
     private Hospital setHospitalHosType(Hospital hospital) {
         String hostypeString = dictFeignClient.getName("Hostype", hospital.getHostype());
         //查询省，市，地区
