@@ -13,7 +13,6 @@ import javax.servlet.http.HttpServletResponse;
 import java.util.List;
 
 @RestController
-@CrossOrigin
 @RequestMapping("/admin/cmn/dict")
 @Api(tags = "数据字典")
 public class DictController {

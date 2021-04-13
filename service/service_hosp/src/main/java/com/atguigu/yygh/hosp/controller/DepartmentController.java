@@ -11,7 +11,6 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @Api(tags = "科室控制器 DepartmentController")
-@CrossOrigin
 @RestController
 @RequestMapping("/admin/hosp/department")
 public class DepartmentController {

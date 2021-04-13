@@ -17,7 +17,6 @@ import springfox.documentation.annotations.ApiIgnore;
 import java.util.List;
 import java.util.Random;
 
-@CrossOrigin
 @RestController
 @RequestMapping("/admin/hosp/hospitalSet")
 @Api(tags = "医院信息管理 HospitalSetController")

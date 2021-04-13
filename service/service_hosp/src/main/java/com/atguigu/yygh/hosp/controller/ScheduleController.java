@@ -13,7 +13,6 @@ import java.util.Map;
 
 @RestController
 @RequestMapping("/admin/hosp/schedule")
-@CrossOrigin
 @Api(tags = "排班控制器 ScheduleController")
 public class ScheduleController {
 
