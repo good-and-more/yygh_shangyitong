@@ -69,7 +69,7 @@ public class DictController {
     //根据parentId查询字典
     @ApiOperation("根据parentId查询字典")
     @GetMapping("findByParentId/{parentId}")
-    public Result findByDictCode(@PathVariable Long parentId) {
+    public Result findByParentId(@PathVariable Long parentId) {
         List<Dict> list = dictService.findChildData(parentId);
         return Result.ok(list);
     }

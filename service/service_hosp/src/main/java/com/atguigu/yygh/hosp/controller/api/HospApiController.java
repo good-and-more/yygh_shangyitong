@@ -11,6 +11,7 @@ import com.atguigu.yygh.vo.hosp.DepartmentVo;
 import com.atguigu.yygh.vo.hosp.HospitalQueryVo;
 import com.atguigu.yygh.vo.hosp.ScheduleOrderVo;
 import com.atguigu.yygh.vo.order.SignInfoVo;
+import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,6 +25,7 @@ import java.util.List;
 import java.util.Map;
 
 @RestController
+@Api(tags = "挂号用户API")
 @RequestMapping("/api/hosp/hospital")
 public class HospApiController {
 
@@ -39,7 +41,7 @@ public class HospApiController {
     @Autowired
     private HospitalSetService hospitalSetService;
 
-    @ApiOperation(value = "查询医院列表")
+    @ApiOperation("查询医院列表")
     @GetMapping("findHospList/{page}/{limit}")
     public Result findHospList(@PathVariable Integer page,
                                @PathVariable Integer limit,
@@ -48,26 +50,31 @@ public class HospApiController {
         return Result.ok(hospitals);
     }
 
-    @ApiOperation(value = "根据医院名称查询")
+    @ApiOperation("根据医院名称查询")
     @GetMapping("findByHosName/{hosname}")
     public Result findByHosName(@PathVariable String hosname) {
         List<Hospital> list = hospitalService.findByHosname(hosname);
         return Result.ok(list);
     }
 
-    @ApiOperation(value = "根据医院编号获取科室")
+    @ApiOperation("根据医院编号获取科室")
     @GetMapping("department/{hoscode}")
-    public Result index(@PathVariable String hoscode) {
+    public Result index(
+            @ApiParam(name = "hoscode", value = "医院code", required = true)
+            @PathVariable String hoscode) {
         List<DepartmentVo> list = departmentService.findDeptTree(hoscode);
         return Result.ok(list);
     }
 
-//    @ApiOperation(value = "根据医院编号获取医院预约挂号详情")
-//    @GetMapping("findHospDetail/{hoscode}")
-//    public Result item(@PathVariable String hoscode) {
-//        Map<String, Object> map = hospitalService.item(hoscode);
-//        return Result.ok(map);
-//    }
+    @ApiOperation(value = "根据医院编号获取医院预约挂号详情")
+    @GetMapping("findHospDetail/{hoscode}")
+    public Result item(
+            @ApiParam(name = "hoscode", value = "医院code", required = true)
+            @PathVariable String hoscode) {
+        Map<String, Object> map = hospitalService.item(hoscode);
+        return Result.ok(map);
+    }
+
 
 //    @ApiOperation(value = "获取可预约排班数据")
 //    @GetMapping("auth/getBookingScheduleRule/{page}/{limit}/{hoscode}/{depcode}")
