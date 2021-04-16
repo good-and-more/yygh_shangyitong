@@ -30,3 +30,15 @@ target/
 
 ### VS Code ###
 .vscode/
+
+### config ###
+service/service_msm/src/main/resources/sms.properties
+
+### Package Files ###
+*.jar
+*.war
+*.nar
+*.ear
+*.zip
+*.tar.gz
+*.rar
