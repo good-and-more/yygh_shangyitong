@@ -23,7 +23,7 @@ public class MsmApiController {
     private MsmService msmService;
 
     @Autowired
-    private RedisTemplate<String, String> redisTemplate;
+    private RedisTemplate<String,String> redisTemplate;
 
     //发送手机短信验证码
     @GetMapping("send/{phone}")
