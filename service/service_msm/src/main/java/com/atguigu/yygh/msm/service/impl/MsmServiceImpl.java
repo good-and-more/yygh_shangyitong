@@ -7,6 +7,8 @@ import com.aliyuncs.DefaultAcsClient;
 import com.aliyuncs.IAcsClient;
 import com.aliyuncs.http.MethodType;
 import com.aliyuncs.profile.DefaultProfile;
+import com.aliyuncs.exceptions.ClientException;
+import com.aliyuncs.exceptions.ServerException;
 import com.atguigu.yygh.msm.service.MsmService;
 import com.atguigu.yygh.msm.utils.ConstantPropertiesUtils;
 import org.springframework.stereotype.Service;
@@ -50,7 +52,10 @@ public class MsmServiceImpl implements MsmService {
         try {
             CommonResponse response = client.getCommonResponse(request);
             System.out.println(response.getData());
-        } catch (Exception e) {
+            return response.getHttpResponse().isSuccess();
+        } catch (ServerException e) {
+            e.printStackTrace();
+        } catch (ClientException e) {
             e.printStackTrace();
         }
         return false;
