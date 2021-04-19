@@ -9,6 +9,8 @@ import com.atguigu.yygh.vo.user.LoginVo;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.atguigu.yygh.user.service.UserInfoService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 
@@ -18,7 +20,8 @@ import java.util.Map;
 @Service
 public class UserInfoServiceImpl extends ServiceImpl<UserInfoMapper, UserInfo> implements UserInfoService {
 
-
+    @Autowired
+    private RedisTemplate<String,String> redisTemplate;
 
     @Override
     public Map<String, Object> loginUser(LoginVo loginVo) {
@@ -29,8 +32,13 @@ public class UserInfoServiceImpl extends ServiceImpl<UserInfoMapper, UserInfo> i
             throw new YyghException(ResultCodeEnum.PARAM_ERROR);
         }
 
-//        判断手机验证码和输入的验证码是否一致
-        //todo 判断手机验证码和输入的验证码是否一致
+        //判断手机验证码和输入的验证码是否一致
+        //校验校验验证码
+        String mobleCode = redisTemplate.opsForValue().get(phone);
+        if(!code.equals(mobleCode)) {
+            throw new YyghException(ResultCodeEnum.CODE_ERROR);
+        }
+
 //        判断是否第一次登录：根据手机号查询数据库，不存在相同手机号就是第一次登录，则需要注册
         QueryWrapper<UserInfo> wrapper = new QueryWrapper<>();
         wrapper.eq("phone", phone);

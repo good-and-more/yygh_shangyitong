@@ -1,5 +1,6 @@
 package com.atguigu.yygh.user.controller;
 
+import com.atguigu.yygh.common.exception.YyghException;
 import com.atguigu.yygh.common.result.Result;
 import com.atguigu.yygh.user.service.UserInfoService;
 import com.atguigu.yygh.vo.user.LoginVo;
@@ -24,7 +25,11 @@ public class UserInfoApiController {
     @ApiOperation("用户手机号登录接口")
     @PostMapping("login")
     public Result login(@RequestBody LoginVo loginVo) {
-        Map<String, Object> map = userInfoService.loginUser(loginVo);
-        return Result.ok(map);
+        try {
+            Map<String, Object> map = userInfoService.loginUser(loginVo);
+            return Result.ok(map);
+        } catch (YyghException e){
+            return Result.build(e.getCode(),e.getMessage());
+        }
     }
 }
