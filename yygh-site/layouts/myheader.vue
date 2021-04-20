@@ -3,12 +3,7 @@
     <div class="wrapper">
       <!-- logo -->
       <div class="left-wrapper v-link selected">
-        <img
-          style="width: 50px"
-          width="50"
-          height="50"
-          src="~assets/images/logo.png"
-        />
+        <img style="width: 50px" width="50" height="50" src="~assets/images/logo.png">
         <span class="text">尚医通 预约挂号统一平台</span>
       </div>
       <!-- 搜索框 -->
@@ -22,24 +17,14 @@
             placeholder="点击输入医院名称"
             @select="handleSelect"
           >
-            <span
-              slot="suffix"
-              class="search-btn v-link highlight clickable selected"
-              >搜索
-            </span>
+            <span slot="suffix" class="search-btn v-link highlight clickable selected">搜索 </span>
           </el-autocomplete>
         </div>
       </div>
       <!-- 右侧 -->
-      <!-- 右侧 -->
       <div class="right-wrapper">
         <span class="v-link clickable">帮助中心</span>
-        <span
-          v-if="name == ''"
-          class="v-link clickable"
-          @click="showLogin()"
-          id="loginDialog"
-          >登录/注册</span>
+        <span v-if="name == ''" class="v-link clickable" @click="showLogin()" id="loginDialog">登录/注册</span>
         <el-dropdown v-if="name != ''" @command="loginMenu">
           <span class="el-dropdown-link">
             {{ name }}<i class="el-icon-arrow-down el-icon--right"></i>
@@ -130,10 +115,7 @@
               <div class="code-text">“快速预约挂号”</div>
             </div>
             <div class="wechat-code-wrapper">
-              <img
-                src="//img.114yygh.com/static/web/code_app.png"
-                class="code-img"
-              />
+              <img src="//img.114yygh.com/static/web/code_app.png" class="code-img"/>
               <div class="code-text">扫一扫下载</div>
               <div class="code-text">“预约挂号”APP</div>
             </div>

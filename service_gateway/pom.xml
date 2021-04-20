@@ -27,6 +27,11 @@
             <groupId>com.alibaba.cloud</groupId>
             <artifactId>spring-cloud-starter-alibaba-nacos-discovery</artifactId>
         </dependency>
-    </dependencies>
 
+        <dependency>
+            <groupId>com.atguigu</groupId>
+            <artifactId>service_util</artifactId>
+            <version>0.0.1-SNAPSHOT</version>
+        </dependency>
+    </dependencies>
 </project>
