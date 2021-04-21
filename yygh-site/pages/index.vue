@@ -268,11 +268,11 @@ export default {
     },
     //在下拉框选择某一个内容，执行下面方法，跳转到详情页面中
     handleSelect(item) {
-      window.location.href = '/hosp/' + item.hoscode
+      window.location.href = '/hospital/' + item.hoscode
     },
     //点击某个医院名称，跳转到详情页面中
     show(hoscode) {
-      window.location.href = '/hosp/' + hoscode
+      window.location.href = '/hospital/' + hoscode
     }
   },
 };

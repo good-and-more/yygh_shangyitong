@@ -7,21 +7,21 @@
         <span
           class="v-link selected dark"
           :onclick="
-            'javascript:window.location=\'/hosp/' + hospital.hoscode + '\''
+            'javascript:window.location=\'/hospital/' + hospital.hoscode + '\''
           "
           >预约挂号
         </span>
       </div>
       <div class="nav-item">
         <span class="v-link clickable dark"
-          :onclick="'javascript:window.location=\'/hosp/detail/' + hospital.hoscode + '\''">
+          :onclick="'javascript:window.location=\'/hospital/detail/' + hospital.hoscode + '\''">
           医院详情
         </span>
       </div>
       <div class="nav-item">
         <span
           class="v-link clickable dark"
-          :onclick="'javascript:window.location=\'/hosp/notice/' + hospital.hoscode + '\''">
+          :onclick="'javascript:window.location=\'/hospital/notice/' + hospital.hoscode + '\''">
           预约须知
         </span>
       </div>

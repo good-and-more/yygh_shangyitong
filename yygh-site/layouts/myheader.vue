@@ -23,7 +23,7 @@
       </div>
       <!-- 右侧 -->
       <div class="right-wrapper">
-        <span class="v-link clickable">帮助中心</span>
+        <span class="v-link clickable" style="width: 30px">帮助中心</span>
         <span v-if="name == ''" class="v-link clickable" @click="showLogin()" id="loginDialog">登录/注册</span>
         <el-dropdown v-if="name != ''" @command="loginMenu">
           <span class="el-dropdown-link">
